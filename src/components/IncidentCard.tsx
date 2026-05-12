@@ -1,4 +1,5 @@
-import { Incident } from '@/types';
+import React from 'react';
+import { Incident } from '@/types/index';
 import { ChevronRight, Clock, ShieldAlert, Activity, Globe } from 'lucide-react';
 import Link from 'next/link';
 
