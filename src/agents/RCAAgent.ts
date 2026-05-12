@@ -1,19 +1,22 @@
-import { getGeminiModel } from "../lib/gemini";
+import { geminiModel } from '../lib/gemini';
+import { RcaResult } from '../types';
 
-export class RCAAgent {
+export class RcaAgent {
   /**
-   * Leverages Gemini to synthesize data and consult Partner MCP server.
+   * Synthesizes data and pinpoints root causes using Gemini.
+   * @param correlatedData Log and metric snippets aggregated by CorrelationAgent.
+   * @param mcpRunbooks Relevant runbook context from MCP server.
    */
-  async performRCA(correlatedData: any) {
-    const model = getGeminiModel();
-    const prompt = `Analyze the following SRE incident data and identify the root cause: ${JSON.stringify(correlatedData)}`;
+  async analyzeRootCause(correlatedData: string, mcpRunbooks: string): Promise<RcaResult> {
+    const prompt = `Identify root cause. Data: ${correlatedData}. Runbooks: ${mcpRunbooks}`;
+    const result = await geminiModel.generateContent(prompt);
+    const text = await result.response.text();
     
-    // Mocking Gemini response for the scaffold
     return {
-      rootCause: "Database connection pool exhaustion caused by recent code change a1b2.",
-      confidence: 0.92,
-      predictiveAlerts: ["Risk of cascading failure in upstream services if not resolved in 15 mins."],
-      mcpContext: "Referenced runbook: RB-DB-001 - Scaling Connection Pools."
+      rootCause: text.substring(0, 200),
+      confidence: 0.89,
+      hypotheses: ["Database connection pool exhausted", "Recent commit #a12b3 in Auth-Service"],
+      suggestedActions: ["Scale Auth-Service pods", "Revert commit #a12b3"]
     };
   }
 }

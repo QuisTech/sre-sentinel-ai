@@ -1,23 +1,21 @@
-export interface IncidentAlert {
-  id: string;
-  source: 'PagerDuty' | 'Prometheus' | 'Manual';
-  severity: 'P0' | 'P1' | 'P2';
-  description: string;
-  timestamp: string;
-}
+import { Incident, Severity } from '../types';
 
 export class TriageAgent {
   /**
-   * Receives initial incident alerts, categorizes severity, and identifies affected systems.
+   * Receives initial incident alerts and categorizes them.
+   * @param rawAlert Webhook data from monitoring systems.
    */
-  async triageIncident(input: IncidentAlert | string) {
-    console.log("Triaging incident...", input);
-    // Mock logic for categorization
+  async triageIncident(rawAlert: any): Promise<Partial<Incident>> {
+    console.log('TriageAgent: Categorizing severity...');
+    // Simulation logic
+    const severity: Severity = rawAlert.level === 'crit' ? 'critical' : 'high';
     return {
-      incidentId: typeof input === 'string' ? 'INC-' + Math.random().toString(36).substr(2, 9) : input.id,
-      context: "High CPU usage detected in production-cluster-west",
-      affectedComponents: ["AuthService", "BillingAPI"],
-      priority: "High"
+      id: Math.random().toString(36).substr(2, 9),
+      title: rawAlert.message || 'Unknown Service Degradation',
+      severity,
+      affectedSystems: ['Auth-Service', 'API-Gateway'],
+      status: 'active',
+      createdAt: new Date().toISOString()
     };
   }
 }
