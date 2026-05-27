@@ -1,12 +1,14 @@
 # SRE Sentinel AI
 
-> Your AI-powered Senior SRE Assistant for lightning-fast incident resolution and proactive system health.
+> Intelligent Incident Response Platform for distributed system observability and accelerated MTTR.
 
 ## 🎯 Problem Statement
-Site Reliability Engineering (SRE) teams face overwhelming challenges in quickly diagnosing and resolving complex incidents across distributed systems. They spend crucial time sifting through disparate logs, metrics, alerts, and code changes, leading to extended Mean Time To Resolution (MTTR).
+Site Reliability Engineering (SRE) teams face overwhelming operational challenges in diagnosing and resolving complex incidents across distributed systems. Manual investigation across fragmented monitoring tools, logs, metrics, and configuration repositories consumes critical response time and delays resolution.
+
+Traditional incident management lacks intelligent automation for data correlation and root cause synthesis. We built SRE Sentinel to give SRE teams production-grade automation for rapid incident analysis and remediation recommendation.
 
 ## 💡 Solution
-SRE Sentinel AI is a functional agent, powered by Gemini and Google Cloud Agent Builder, that integrates with a Partner Entity’s MCP server and various monitoring tools. It acts as an intelligent SRE assistant, autonomously correlating incident data, identifying root causes, and suggesting precise remediation steps.
+SRE Sentinel AI is a comprehensive incident response platform powered by Gemini and Google Cloud's orchestration stack. It integrates with a distributed ecosystem of monitoring tools, version control systems, and data repositories through a unified MCP (Model Context Protocol) interface. The system correlates multi-source incident data, performs structured root cause analysis, and generates prioritized remediation recommendations.
 
 ## 🏗️ Tech Stack
 
@@ -17,42 +19,42 @@ SRE Sentinel AI is a functional agent, powered by Gemini and Google Cloud Agent 
 | APIs | Gemini API, Google Cloud Agent Builder API, MCP Server API, Elasticsearch API, GitLab API, MongoDB Atlas API, Arize AI API, BigQuery ML API, Fivetran API |
 | Deployment | Google Cloud Run, Vercel |
 
-## 🤖 Agent Architecture
+## 🏛️ System Architecture
 
-### Incident Triage Agent
-- **Role:** Receives initial incident alerts, categorizes severity, and identifies affected systems.
-- **Inputs:** Webhooks from monitoring systems
-- **Outputs:** Incident context, prioritized list of components
+### Incident Ingestion Service
+- **Function:** Receives and classifies incident alerts from monitoring systems
+- **Sources:** Webhooks from monitoring infrastructure (Prometheus, Datadog, etc.)
+- **Outputs:** Normalized incident context, severity classification, affected component identification
 
-### Data Correlation Agent
-- **Role:** Gathers and correlates relevant data from various sources (Logs, Commits, Metrics).
-- **Inputs:** Incident context
-- **Outputs:** Aggregated logs, code changes, and historical incident data
+### Data Correlation Engine
+- **Function:** Aggregates and correlates multi-source incident context
+- **Sources:** Elasticsearch logs, GitLab commits, metrics systems, historical incident database
+- **Outputs:** Correlated log streams, relevant code changes, similar incident patterns
 
-### Root Cause Analysis Agent (Gemini Core)
-- **Role:** Synthesizes data, consults MCP runbooks, and pinpoint root causes.
-- **Inputs:** Correlated data, MCP context
-- **Outputs:** Root cause hypotheses, confidence scores
+### Root Cause Analysis Service (Gemini Core)
+- **Function:** Synthesizes correlated data and generates root cause hypotheses
+- **Process:** LLM-powered reasoning over incident data, consultation of operational runbooks via MCP
+- **Outputs:** Root cause candidates with confidence metrics, diagnostic summary
 
-### Remediation Suggestion Agent
-- **Role:** Proposes actionable remediation steps and links to relevant runbooks.
-- **Inputs:** Root cause hypothesis
-- **Outputs:** Prioritized remediation actions
+### Remediation Recommendation Engine
+- **Function:** Generates actionable remediation steps based on root cause analysis
+- **Process:** Matches root causes to documented remediation procedures, prioritization scoring
+- **Outputs:** Prioritized remediation actions, linked runbook references, implementation guidance
 
-### Observability Agent
-- **Role:** Monitors the AI agents using Arize to ensure reliability.
-- **Inputs:** Agent logs, LLM traces
-- **Outputs:** Performance dashboards, drift alerts
+### Observability Monitoring Layer
+- **Function:** Instruments the incident response pipeline for reliability measurement
+- **Tools:** Arize for LLM tracing and quality metrics
+- **Outputs:** Performance dashboards, LLM drift detection, reliability SLOs
 
 ## 🖥️ UI Pages
 
-### Dashboard
-**Purpose:** Overview of active incidents and agent status.
-**Components:** Active Incidents List · Agent Activity Log · System Health Summary
+### Incident Dashboard
+**Purpose:** Real-time overview of active incidents and system health.
+**Components:** Active Incident List · Response Pipeline Status · System Health Metrics · Agent Activity Log
 
-### Incident Detail View
-**Purpose:** Deep dive into a specific incident with AI insights.
-**Components:** Interactive Timeline · RCA Card · Suggested Actions · Raw Data View
+### Incident Detail Analysis
+**Purpose:** Comprehensive analysis view for individual incident investigation.
+**Components:** Incident Timeline · Root Cause Summary · Correlation Evidence · Recommended Actions · Raw Data Explorer
 
 ## 🚀 Getting Started
 
@@ -63,20 +65,20 @@ cp .env.example .env
 npm run dev
 ```
 
-## 🎬 Demo Flow
+## 🎬 Demonstration Flow
 
-1. Step 1: Introduce the SRE incident management challenge.
-2. Step 2: Simulate an incident alert triggering.
-3. Step 3: Show SRE Sentinel dashboard highlighting the new incident.
-4. Step 4: Demonstrate the Data Correlation Agent querying Elastic, GitLab, and MongoDB.
-5. Step 5: Show Gemini synthesizing data and consulting the MCP server for root cause analysis.
-6. Step 6: Display the Remediation Suggestion Agent proposing actionable steps.
-7. Step 7: Show Arize monitoring the agent performance.
-8. Step 8: Conclude with the reduction in MTTR.
+1. Step 1: Present the SRE incident management challenge at scale
+2. Step 2: Trigger a simulated incident alert through the monitoring system
+3. Step 3: Display SRE Sentinel dashboard detecting and ingesting the incident
+4. Step 4: Show Data Correlation Engine querying Elasticsearch, GitLab, and MongoDB
+5. Step 5: Demonstrate Gemini synthesizing correlated data and consulting MCP runbooks for analysis
+6. Step 6: Display Remediation Recommendation Engine proposing prioritized actions
+7. Step 7: Show Arize observability dashboards tracking LLM performance during analysis
+8. Step 8: Summarize MTTR improvements and operational impact
 
-## 📊 Scoring Strategy
-Deep integration of all sponsor APIs (MongoDB, Elastic, Fivetran, Arize) into a high-impact SRE workflow with a complex multi-agent architecture.
+## 📊 Technical Implementation
+Comprehensive integration of sponsor technologies (MongoDB, Elastic, Fivetran, Arize) within a structured incident response architecture. The platform demonstrates enterprise-grade incident automation through multi-stage LLM-powered analysis, production-ready observability instrumentation, and reliable data aggregation across distributed observability systems.
 
 ---
 
-*Generated by [Agents Assemble](https://github.com/QuisTech/agents-assemble) — The Hackathon Co-Founder Meta-System*
+*Developed by [QuisTech](https://github.com/QuisTech) — Building intelligent infrastructure automation*
